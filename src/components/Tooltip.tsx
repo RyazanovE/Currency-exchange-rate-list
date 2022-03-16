@@ -4,7 +4,7 @@ import { setCoordAction } from "./store/coordReducer";
 import { RootState } from "./store/store";
 
 interface TooltipProps {
-  isEnter?: boolean;
+
 }
 
 export const Tooltip: FC<TooltipProps> = (props) => {
@@ -13,9 +13,16 @@ export const Tooltip: FC<TooltipProps> = (props) => {
     pX: state.coordReducer.pX,
     pY: state.coordReducer.pY,
   }));
-    
+  const isMoving = useSelector((state: RootState) => {
+    return state.isMovingReducer.isMoving
+  })
+  const isEnter = useSelector((state: RootState) => {
+    return state.isEnterReducer.isEnter;
+  });
+
+
 function getOpacity () {
-  if (props.isEnter) {
+  if (!isMoving && isEnter) {
     return {opacity: 1}
   } else {
     return {opacity: 0}

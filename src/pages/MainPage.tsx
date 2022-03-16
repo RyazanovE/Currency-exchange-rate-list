@@ -1,18 +1,19 @@
+import React, { useRef, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../components/store/store";
 import { Tooltip } from "../components/Tooltip";
 import { MyTable } from "../components/MyTable";
 import {setCurrentCoordAction} from "../components/store/currentCoordReducer"
 import {setCoordAction} from "../components/store/coordReducer"
+import { moveAction, stopAction } from "../components/store/isMovingReducer";
 
 export const MainPage = () => {
+  let timeout: any = useRef(null);
+  
   const tooltip = document.querySelector(".tooltip");
   const dispatch = useDispatch()
   const valuteArr = useSelector((state: RootState) => {
     return state.valuteArrReducer.valuteArr;
-  });
-  const isEnter = useSelector((state: RootState) => {
-    return state.isEnterReducer.isEnter;
   });
   const currentValute = useSelector(
     (state: RootState) => state.currentValuteReducer.currentValute
@@ -22,11 +23,27 @@ export const MainPage = () => {
     pY: state.currentCoordReducer.pY,
   }));
 
-  function moveHandler(e: React.MouseEvent) {
+
+
+
+  
+  function stopHandler(e: React.MouseEvent) {
+    e.preventDefault();
+    (() => {
+      dispatch(moveAction())
+      clearTimeout(timeout.current);
+      timeout.current = setTimeout(() =>  dispatch(stopAction()), 500);
+    })();
+  }
+
+
+
+  function coordHandler (e: React.MouseEvent) {
+    
     const pX = e.pageX + 5;
     const pY = e.pageY + 10;
   
-     dispatch(setCurrentCoordAction(e.pageX, e.pageY));
+    dispatch(setCurrentCoordAction(e.pageX, e.pageY));
   
     if (!tooltip) {
       return;
@@ -52,18 +69,21 @@ export const MainPage = () => {
     } else {
       dispatch(setCoordAction(pX, pY));
     }
-   
   }
 
   return (
     <div className="value-container container"
-    onMouseMove={moveHandler}
+    onMouseMove={(e) => {
+      stopHandler(e)
+      coordHandler(e)
+    } }
     >
+     
       <MyTable
         valute={valuteArr}
         className="table-wrappper__value-table value-table"
       />
-      {(<Tooltip isEnter={isEnter}>{currentValute}</Tooltip>)}
+      {(<Tooltip>{currentValute}</Tooltip>)}
     </div>
   );
 };
