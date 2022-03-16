@@ -7,3 +7,9 @@ export interface IValuteItem {
   Value: number;
   Previous: number;
 }
+
+export interface ICoords {
+  pX: number,
+  pY: number,
+
+}
