@@ -2,7 +2,9 @@
 --table-color: white;
 --table-border-color: rgb(224, 224, 224);
 --table-hover-color: rgb(247, 245, 245);
-
+width: 100%;
+max-width: 100%;
+overflow-x: hidden;
 }
 
 * {

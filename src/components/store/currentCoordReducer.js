@@ -15,4 +15,4 @@ const defaultState = {
     }
   };
   
-  export const setCurrrentCoordAction = (pX, pY) => ({type: SET_CURRENT_COORD, payload: {pX, pY}})
+  export const setCurrentCoordAction = (pX, pY) => ({type: SET_CURRENT_COORD, payload: {pX, pY}})
