@@ -16,7 +16,7 @@ export const MainPage = () => {
     return state.valuteArrReducer.valuteArr;
   });
   const currentValute = useSelector(
-    (state: RootState) => state.currentValuteReducer.currentValute
+    (state: RootState) => state.currentValuteReducer.Name
   );
   const currentCoord = useSelector((state: RootState) => ({
     pX: state.currentCoordReducer.pX,

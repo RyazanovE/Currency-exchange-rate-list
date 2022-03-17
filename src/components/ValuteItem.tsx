@@ -36,10 +36,14 @@ function leaveHandler(e: React.MouseEvent) {
 }
 
 function enterHandler() {
-  dispatch(setValuteAction(item.Name));
+  dispatch(setValuteAction(item));
   dispatch(EnterAction());
 }
+
 function clickHandler() {
+  dispatch(ExitAction());
+  dispatch(setValuteAction(item));
+  localStorage.currentCharCode = item.CharCode
   navigate('/valutepage')
 }
 

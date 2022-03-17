@@ -1,5 +1,5 @@
 const defaultState = {
-    currentValute: null,
+    
   };
 
   const SET_VALUTE="SET_VALUTE"
@@ -8,7 +8,7 @@ const defaultState = {
   export const currentValuteReducer = (state = defaultState, action) => {
     switch (action.type) {
       case SET_VALUTE:
-        return {currentValute: action.payload};
+        return {...action.payload};
       default:
         return state;
     }
