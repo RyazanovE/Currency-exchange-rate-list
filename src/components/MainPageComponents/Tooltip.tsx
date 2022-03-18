@@ -1,11 +1,10 @@
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCoordAction } from "./store/coordReducer";
-import { RootState } from "./store/store";
+import { setCoordAction } from "../store/reducers/coordReducer";
+import { RootState } from "../store/store";
+import {isEnterReducer} from "../store/reducers/isEnterReducer"
 
-interface TooltipProps {
-
-}
+interface TooltipProps {}
 
 export const Tooltip: FC<TooltipProps> = (props) => {
   const dispatch = useDispatch();
@@ -14,31 +13,29 @@ export const Tooltip: FC<TooltipProps> = (props) => {
     pY: state.coordReducer.pY,
   }));
   const isMoving = useSelector((state: RootState) => {
-    return state.isMovingReducer.isMoving
-  })
+    return state.isMovingReducer.isMoving;
+  });
   const isEnter = useSelector((state: RootState) => {
     return state.isEnterReducer.isEnter;
   });
 
-
-function getOpacity () {
-  if (!isMoving && isEnter) {
-    return {opacity: 1}
-  } else {
-    return {opacity: 0}
+  function getOpacity() {
+    if (!isMoving && isEnter) {
+      return { opacity: 1 };
+    } else {
+      return { opacity: 0 };
+    }
   }
-}
-
 
   return (
-    <div 
+    <div
       onMouseMove={(e) => {
         dispatch(setCoordAction(e.pageX, e.pageY));
       }}
       className="tooltip"
-      style={{ top: coords.pY, left: coords.pX, ...getOpacity()}}
+      style={{ top: coords.pY, left: coords.pX, ...getOpacity() }}
     >
-        {props.children}
+      {props.children}
     </div>
   );
 };

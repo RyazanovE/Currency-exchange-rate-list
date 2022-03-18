@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setValuteArrAction } from "./components/store/valuteArrReducer";
+import { setValuteArrAction } from "./components/store/reducers/valuteArrReducer";
 import { Routes, Route } from "react-router-dom";
 import { MainPage } from "./pages/MainPage";
-import {ValutePage} from "./pages/ValutePage"
+import { ValutePage } from "./pages/ValutePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,8 +26,8 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<MainPage/>}/>
-      <Route path="/valutepage" element={<ValutePage/>}/>
+      <Route path="/" element={<MainPage />} />
+      <Route path="/valutepage" element={<ValutePage />} />
     </Routes>
   );
 }

@@ -13,3 +13,8 @@ export interface ICoords {
   pY: number,
 
 }
+
+export interface ISelectedValue {
+  date: string,
+  value: IValuteItem | null,
+}

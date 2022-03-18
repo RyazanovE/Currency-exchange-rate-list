@@ -1,17 +1,16 @@
-import React, { useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../components/store/store";
-import { Tooltip } from "../components/Tooltip";
-import { MyTable } from "../components/MyTable";
-import {setCurrentCoordAction} from "../components/store/currentCoordReducer"
-import {setCoordAction} from "../components/store/coordReducer"
-import { moveAction, stopAction } from "../components/store/isMovingReducer";
+import { Tooltip } from "../components/MainPageComponents/Tooltip";
+import { MainTable } from "../components/MainPageComponents/MainTable";
+import { setCurrentCoordAction } from "../components/store/reducers/currentCoordReducer";
+import { setCoordAction } from "../components/store/reducers/coordReducer";
+import { moveAction, stopAction } from "../components/store/reducers/isMovingReducer";
 
 export const MainPage = () => {
   let timeout: any = useRef(null);
-  
   const tooltip = document.querySelector(".tooltip");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const valuteArr = useSelector((state: RootState) => {
     return state.valuteArrReducer.valuteArr;
   });
@@ -23,32 +22,25 @@ export const MainPage = () => {
     pY: state.currentCoordReducer.pY,
   }));
 
-
-
-
-  
   function stopHandler(e: React.MouseEvent) {
     e.preventDefault();
     (() => {
-      dispatch(moveAction())
+      dispatch(moveAction());
       clearTimeout(timeout.current);
-      timeout.current = setTimeout(() =>  dispatch(stopAction()), 500);
+      timeout.current = setTimeout(() => dispatch(stopAction()), 500);
     })();
   }
 
-
-
-  function coordHandler (e: React.MouseEvent) {
-    
+  function coordHandler(e: React.MouseEvent) {
     const pX = e.pageX + 5;
     const pY = e.pageY + 10;
-  
+
     dispatch(setCurrentCoordAction(e.pageX, e.pageY));
-  
+
     if (!tooltip) {
       return;
     }
-  
+
     const tooltipHeight = (tooltip as HTMLElement).offsetHeight;
     const tooltipWidth = (tooltip as HTMLElement).offsetWidth;
     const currentPositionY = currentCoord.pY + tooltipHeight;
@@ -57,33 +49,31 @@ export const MainPage = () => {
       document.documentElement.clientHeight +
       document.documentElement.scrollTop;
     const maxPositionX = document.documentElement.clientWidth;
-  
+
     if (currentPositionX > maxPositionX && currentPositionY > maxPositionY) {
       dispatch(setCoordAction(pX - 10 - tooltipWidth, pY - tooltipHeight));
     } else if (currentPositionX > maxPositionX) {
-        dispatch(setCoordAction(pX - 10 - tooltipWidth, pY));
-    
+      dispatch(setCoordAction(pX - 10 - tooltipWidth, pY));
     } else if (currentPositionY > maxPositionY) {
       dispatch(setCoordAction(pX, pY - tooltipHeight));
-     
     } else {
       dispatch(setCoordAction(pX, pY));
     }
   }
 
   return (
-    <div className="value-container container"
-    onMouseMove={(e) => {
-      stopHandler(e)
-      coordHandler(e)
-    } }
+    <div
+      className="main-page-container container"
+      onMouseMove={(e) => {
+        stopHandler(e);
+        coordHandler(e);
+      }}
     >
-     
-      <MyTable
+      <MainTable
         valute={valuteArr}
-        className="table-wrappper__value-table value-table"
+        className="table-wrappper__valute-table valute-table"
       />
-      {(<Tooltip>{currentValute}</Tooltip>)}
+      {<Tooltip>{currentValute}</Tooltip>}
     </div>
   );
 };

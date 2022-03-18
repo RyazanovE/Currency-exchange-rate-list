@@ -2,6 +2,7 @@
 --table-color: white;
 --table-border-color: rgb(224, 224, 224);
 --table-hover-color: rgb(247, 245, 245);
+--tooltip-color: rgb(207, 227, 245);;
 width: 100%;
 max-width: 100%;
 overflow-x: hidden;
@@ -35,7 +36,7 @@ code {
   align-items: center;
 }
 
-.value-table {
+.valute-table {
   width: 100%;
   padding: 60px;
   background-color: var(--table-color);
@@ -45,29 +46,29 @@ code {
 
 
 
-.value-table caption {
+.table-wrappper__valute-table caption {
   padding: 20px 0;
   background-color: var(--table-color);
 }
 
-.value-table th {
+.table-wrappper__valute-table th {
   padding: 20px;
 }
 
 
-.value-table td {
+.table-wrappper__valute-table td {
   width: 33.33%;
   padding: 15px 0;
 }
 
 
 
-.value-table tr{
+.table-wrappper__valute-table tr{
 border-bottom: 1px solid var(--table-border-color);
 transition: all 0.1s ease;
 }
 
-.value-table tr:not(:nth-child(1)):hover {
+.table-wrappper__valute-table tr:not(:nth-child(1)):hover {
   background-color: var(--table-hover-color);
   cursor: pointer;
 }
@@ -80,7 +81,7 @@ transition: all 0.1s ease;
   justify-content: center;
   align-items: center;
   
-  background-color: rgb(207, 227, 245);
+  background-color: var(--tooltip-color);
   border-radius: 10px;
   opacity: 0.9;
 
@@ -88,6 +89,26 @@ transition: all 0.1s ease;
 }
 
 
-.valute-page-container {
+.grid-table__item {
   
+  text-align: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+
+.valute-page-container__valute-table td {
+  padding: 20px 0;
+}
+
+.valute-page-container__valute-table tr:not(:nth-last-child(1)) {
+  border-bottom: 1px solid var(--table-border-color);
+}
+
+.valute-page-container__valute-table td:not(:nth-last-child(1)), .valute-page-container__valute-table th  {
+ border-right: 1px solid var(--table-border-color);
+}
+
+.valute-page-caption {
+  padding: 20px 0;
 }

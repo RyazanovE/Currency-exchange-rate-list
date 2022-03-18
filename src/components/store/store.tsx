@@ -1,10 +1,11 @@
 import {createStore, combineReducers} from 'redux'
-import { isEnterReducer } from './isEnterReducer'
-import {coordReducer} from './coordReducer'
-import { currentValuteReducer } from './currentValuteReducer';
-import { currentCoordReducer } from './currentCoordReducer';
-import {valuteArrReducer} from './valuteArrReducer'
-import {isMovingReducer} from "./isMovingReducer"
+import { isEnterReducer } from './reducers/isEnterReducer'
+import {coordReducer} from './reducers/coordReducer'
+import { currentValuteReducer } from './reducers/currentValuteReducer';
+import { currentCoordReducer } from './reducers/currentCoordReducer';
+import {valuteArrReducer} from './reducers/valuteArrReducer'
+import {isMovingReducer} from "./reducers/isMovingReducer"
+import {isLoadingReducer} from "./reducers/isLoadingReducer"
 
   export const rootReducer = combineReducers({
     isEnterReducer,
@@ -13,6 +14,7 @@ import {isMovingReducer} from "./isMovingReducer"
     currentCoordReducer,
     valuteArrReducer,
     isMovingReducer,
+    isLoadingReducer,
   });
 
 export const store = createStore(rootReducer)
