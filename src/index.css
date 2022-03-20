@@ -1,8 +1,13 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 :root {
 --table-color: white;
 --table-border-color: rgb(224, 224, 224);
 --table-hover-color: rgb(247, 245, 245);
---tooltip-color: rgb(207, 227, 245);;
+--tooltip-color: rgb(207, 227, 245);
+--annotation-color: rgb(184, 189, 199);
+--header-footer-color: rgb(105, 94, 94);
 width: 100%;
 max-width: 100%;
 overflow-x: hidden;
@@ -12,6 +17,11 @@ overflow-x: hidden;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a, a:visited, a:active  {
+  text-decoration: none; 
 }
 
 body {
@@ -30,8 +40,10 @@ code {
 
 .container {
   width: 100%;
-  padding: 10vh 10vw;
+  padding: 5vh 10vw;
+  min-height: 88vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -75,17 +87,19 @@ transition: all 0.1s ease;
 
 .tooltip {
   min-width: 150px;
-  width: 15vw;
+  width: 12vw;
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--table-color);
   
-  background-color: var(--tooltip-color);
+  background-color: var(--header-footer-color);
   border-radius: 10px;
-  opacity: 0.9;
 
-  padding: 20px;
+  padding: 10px;
+
+  transition: opacity 0.1s ease-in;
 }
 
 
@@ -111,4 +125,42 @@ transition: all 0.1s ease;
 
 .valute-page-caption {
   padding: 20px 0;
+}
+
+.selected-value-table {
+  width: 70%;
+  text-align: center;
+  background-color: var(--table-hover-color);
+  border-radius: 10px;
+}
+
+.selected-value-table th, 
+.selected-value-table td {
+  padding: 10px 20px;
+}
+
+
+
+.button-back {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--table-hover-color);
+  border-radius: 10px;
+  color: inherit;
+  margin-top: 40px;
+}
+
+header {
+  height: 8vh;
+  width: 100%;
+  background: var(--header-footer-color);
+}
+
+footer {
+  height: 4vh;
+  width: 100%;
+  background: var(--header-footer-color);
 }

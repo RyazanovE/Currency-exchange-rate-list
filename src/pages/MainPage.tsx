@@ -2,10 +2,11 @@ import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../components/store/store";
 import { Tooltip } from "../components/MainPageComponents/Tooltip";
-import { MainTable } from "../components/MainPageComponents/MainTable";
+import { MainTable } from "../components/table/MainTable";
 import { setCurrentCoordAction } from "../components/store/reducers/currentCoordReducer";
 import { setCoordAction } from "../components/store/reducers/coordReducer";
 import { moveAction, stopAction } from "../components/store/reducers/isMovingReducer";
+import { Footer } from "../components/Footer/Footer";
 
 export const MainPage = () => {
   let timeout: any = useRef(null);
@@ -75,5 +76,7 @@ export const MainPage = () => {
       />
       {<Tooltip>{currentValute}</Tooltip>}
     </div>
+  
+
   );
 };

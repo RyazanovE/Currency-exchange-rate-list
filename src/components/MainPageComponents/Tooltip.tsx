@@ -21,7 +21,7 @@ export const Tooltip: FC<TooltipProps> = (props) => {
 
   function getOpacity() {
     if (!isMoving && isEnter) {
-      return { opacity: 1 };
+      return { opacity: 0.8 };
     } else {
       return { opacity: 0 };
     }

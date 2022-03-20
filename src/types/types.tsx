@@ -16,5 +16,5 @@ export interface ICoords {
 
 export interface ISelectedValue {
   date: string,
-  value: IValuteItem | null,
+  value: IValuteItem,
 }

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { List } from "../reusedComponents/List";
+import { List } from "../List/List";
 import { IValuteItem } from "../../types/types";
-import { ValuteItem } from "./ValuteItem";
+import { ValuteItem } from "../MainPageComponents/ValuteItem";
 
 interface MaintableProps {
   valute: IValuteItem[];

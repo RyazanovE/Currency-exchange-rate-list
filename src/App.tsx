@@ -4,6 +4,9 @@ import { setValuteArrAction } from "./components/store/reducers/valuteArrReducer
 import { Routes, Route } from "react-router-dom";
 import { MainPage } from "./pages/MainPage";
 import { ValutePage } from "./pages/ValutePage";
+import { BrowserRouter } from "react-router-dom";
+import { Footer } from "./components/Footer/Footer";
+import { Header } from "./components/Header/Header";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,10 +28,14 @@ function App() {
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<MainPage />} />
-      <Route path="/valutepage" element={<ValutePage />} />
-    </Routes>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/valutepage" element={<ValutePage />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
   );
 }
 

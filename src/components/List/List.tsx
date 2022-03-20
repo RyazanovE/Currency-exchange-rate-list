@@ -2,7 +2,7 @@ import React from "react";
 
 interface ListProps<T> {
   items: T[];
-  renderItem: (item: T) => React.ReactNode;
+  renderItem: (item: T, ind?: number) => React.ReactNode;
 }
 
 export function List<T>(props: ListProps<T>) {

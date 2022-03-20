@@ -4,6 +4,7 @@ import { IValuteItem } from "../../types/types";
 import { ExitAction, EnterAction } from "../store/reducers/isEnterReducer";
 import { setValuteAction } from "../store/reducers/currentValuteReducer";
 import { useNavigate } from "react-router-dom";
+import {startLoadingAction} from "../store/reducers/isLoadingReducer"
 
 interface ValuteItemProps {
   item: IValuteItem;
@@ -13,7 +14,6 @@ export const ValuteItem: FC<ValuteItemProps> = ({ item }) => {
   const diff = valuteDiff(item.Value, item.Previous);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
  function valuteDiff(y: number, x: number) {
     return (((y - x) / x) * 100).toFixed(2);
   }
