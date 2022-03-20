@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../components/store/store";
-import { Tooltip } from "../components/MainPageComponents/Tooltip";
+import { Tooltip } from "../components/tooltip/Tooltip";
 import { MainTable } from "../components/table/MainTable";
 import { setCurrentCoordAction } from "../components/store/reducers/currentCoordReducer";
 import { setCoordAction } from "../components/store/reducers/coordReducer";

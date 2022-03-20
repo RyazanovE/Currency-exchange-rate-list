@@ -14,13 +14,13 @@ export const TenDaysValuteTable: FC<TenDaysValuteTableProps> = (props) => {
     return ((y - x)).toFixed(4);
   }
 
-  function diffColor(item: any) {
   
-    
+
+  function diffColor(item: any) {
     if (item.value !== null) {
-      return  Number(valuteDiff(item.value?.Value, item.value.Previous)) < 0 ? {color: "red"} : {color: "green"}
+      return  Number(valuteDiff(item.value?.Value, item.value.Previous)) < 0 ? {color: "red"} : {color: "#28bc00"}
     } else {
-      return {color: "block"}
+      return {color: "black"}
     }
   }
 

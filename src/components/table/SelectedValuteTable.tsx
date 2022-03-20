@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from "react";
 import { ISelectedValue } from "../../types/types";
 import { useDispatch } from "react-redux";
-import { startLoadingAction } from "../store/reducers/isLoadingReducer";
 
 interface SelectedValuteTableProps {
   arr: ISelectedValue[];
@@ -9,7 +8,6 @@ interface SelectedValuteTableProps {
 }
 
 export const SelectedValuteTable: FC<SelectedValuteTableProps> = (props) => {
-  const dispatch = useDispatch();
 
   const thArr = [
     "Дата",
@@ -24,13 +22,6 @@ export const SelectedValuteTable: FC<SelectedValuteTableProps> = (props) => {
     props.arr[0].value.Previous,
     props.arr[0].value.Value,
   ];
-
-
-  useEffect(() => {
-    return () => {
-      dispatch(startLoadingAction());
-    };
-  }, []);
 
   return (
     <table className="selected-value-table">

@@ -4,7 +4,6 @@ import { IValuteItem } from "../../types/types";
 import { ExitAction, EnterAction } from "../store/reducers/isEnterReducer";
 import { setValuteAction } from "../store/reducers/currentValuteReducer";
 import { useNavigate } from "react-router-dom";
-import {startLoadingAction} from "../store/reducers/isLoadingReducer"
 
 interface ValuteItemProps {
   item: IValuteItem;
@@ -51,7 +50,7 @@ export const ValuteItem: FC<ValuteItemProps> = ({ item }) => {
       <td>
         {diff + "% "}
         {Number(diff) > 0 ? (
-          <span style={{ color: "green" }}>&#11014;</span>
+          <span style={{ color: "#28bc00" }}>&#11014;</span>
         ) : (
           <span style={{ color: "red" }}>&#11015;</span>
         )}

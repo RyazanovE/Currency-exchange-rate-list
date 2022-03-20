@@ -7,7 +7,7 @@
 --table-hover-color: rgb(247, 245, 245);
 --tooltip-color: rgb(207, 227, 245);
 --annotation-color: rgb(184, 189, 199);
---header-footer-color: rgb(105, 94, 94);
+--header-footer-color: rgb(143, 136, 136);
 width: 100%;
 max-width: 100%;
 overflow-x: hidden;
@@ -61,6 +61,9 @@ code {
 .table-wrappper__valute-table caption {
   padding: 20px 0;
   background-color: var(--table-color);
+  font-weight: 700;
+  background-color: var(--table-hover-color);
+  border-radius: 10px;
 }
 
 .table-wrappper__valute-table th {
@@ -125,6 +128,7 @@ transition: all 0.1s ease;
 
 .valute-page-caption {
   padding: 20px 0;
+  font-weight: 700;
 }
 
 .selected-value-table {
@@ -132,6 +136,7 @@ transition: all 0.1s ease;
   text-align: center;
   background-color: var(--table-hover-color);
   border-radius: 10px;
+  margin: 30px 0;
 }
 
 .selected-value-table th, 
@@ -151,6 +156,11 @@ transition: all 0.1s ease;
   border-radius: 10px;
   color: inherit;
   margin-top: 40px;
+  transition: all 0.1s ease-in;
+}
+
+.button-back:hover {
+  background-color: rgb(233, 231, 231);
 }
 
 header {
@@ -160,7 +170,76 @@ header {
 }
 
 footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;  
   height: 4vh;
   width: 100%;
   background: var(--header-footer-color);
+}
+
+footer a {
+  color: var(--table-color);
+  opacity: 0.6;
+  font-size: 1rem;
+  transition: all 0.1s ease-in-out;
+}
+
+footer a:hover {
+  opacity: 1;
+}
+
+.loader {
+  width: 100px;
+  height: 100px;
+}
+
+
+
+@media (max-width: 950px) {
+  .valute-page-container__valute-table tr {
+    display: inline-grid;
+    border: none;
+  }
+  
+    .valute-page-container__valute-table td, .valute-page-container__valute-table th {
+      padding: 20px 6vw;
+    }
+    
+    .valute-page-container__valute-table td:not(:nth-last-child(1)), .valute-page-container__valute-table th {
+      border: none;
+      border-bottom: 1px solid var(--table-border-color);
+    }
+
+    .valute-page-container__valute-table tr:not(:nth-last-child(1)) {
+      border-bottom: none;
+      border-right: 1px solid var(--table-border-color);
+    }
+
+}
+
+@media (max-width: 600px) {
+  .selected-value-table tr {
+    display: inline-grid;
+    
+  }
+  .selected-value-table th, .selected-value-table td  {
+    padding: 10px 3vw;
+  }
+
+  .selected-value-table {
+    width: 100%;
+  }
+  .selected-value-table tr {
+    width: 50%;
+  }
+
+}
+
+
+@media (max-width: 450px) {
+  .valute-page-container__valute-table td, .valute-page-container__valute-table th {
+    padding: 20px 3vw;
+  }
+
 }
