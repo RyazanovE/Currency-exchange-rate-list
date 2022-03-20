@@ -1,6 +1,3 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setValuteArrAction } from "./components/store/reducers/valuteArrReducer";
 import { Routes, Route } from "react-router-dom";
 import { MainPage } from "./pages/MainPage";
 import { ValutePage } from "./pages/ValutePage";
@@ -10,27 +7,6 @@ import { Header } from "./components/Header/Header";
 
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    fetchValute();
-  }, []);
-
-  function fetchValute() {
-
-    try {
-      fetch("https://www.cbr-xml-daily.ru/daily_json.js")
-        .then((resolve) => resolve.json())
-        .then((data) =>
-          dispatch(setValuteArrAction(Object.values(data.Valute)))
-        );
-    } catch (e) {
-      console.log("Error", e);
-    }
-
-  }
-
-
 
   return (
     <BrowserRouter>

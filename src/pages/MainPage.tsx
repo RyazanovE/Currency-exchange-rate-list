@@ -1,27 +1,42 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../components/store/store";
 import { Tooltip } from "../components/tooltip/Tooltip";
 import { MainTable } from "../components/table/MainTable";
-import { setCurrentCoordAction } from "../components/store/reducers/currentCoordReducer";
 import { setCoordAction } from "../components/store/reducers/coordReducer";
-import { moveAction, stopAction } from "../components/store/reducers/isMovingReducer";
-import { Footer } from "../components/Footer/Footer";
+import {
+  moveAction,
+  stopAction,
+} from "../components/store/reducers/isMovingReducer";
+
+
+
 
 export const MainPage = () => {
   let timeout: any = useRef(null);
   const tooltip = document.querySelector(".tooltip");
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
-  const valuteArr = useSelector((state: RootState) => {
-    return state.valuteArrReducer.valuteArr;
-  });
   const currentValute = useSelector(
     (state: RootState) => state.currentValuteReducer.Name
   );
-  const currentCoord = useSelector((state: RootState) => ({
-    pX: state.currentCoordReducer.pX,
-    pY: state.currentCoordReducer.pY,
-  }));
+  const [valuteArr, setValuteArr] = useState([]);
+
+  useEffect(() => {
+    dispatch(moveAction());
+    fetchValute();
+  }, []);
+
+  async function fetchValute() {
+    try {
+      const resolve = await fetch("https://www.cbr-xml-daily.ru/daily_json.js");
+      const result = await resolve.json();
+      setValuteArr(Object.values(result.Valute));
+    } catch (e) {
+      console.log("Error", e);
+    }
+    setIsLoading(false);
+  }
 
   function stopHandler(e: React.MouseEvent) {
     e.preventDefault();
@@ -33,19 +48,18 @@ export const MainPage = () => {
   }
 
   function coordHandler(e: React.MouseEvent) {
-    const pX = e.pageX + 5;
-    const pY = e.pageY + 10;
-
-    dispatch(setCurrentCoordAction(e.pageX, e.pageY));
-
     if (!tooltip) {
       return;
     }
+    const pX = e.pageX + 5;
+    const pY = e.pageY + 10;
+
+  
 
     const tooltipHeight = (tooltip as HTMLElement).offsetHeight;
     const tooltipWidth = (tooltip as HTMLElement).offsetWidth;
-    const currentPositionY = currentCoord.pY + tooltipHeight;
-    const currentPositionX = currentCoord.pX + tooltipWidth;
+    const currentPositionY = e.pageY + tooltipHeight;
+    const currentPositionX = e.pageX + tooltipWidth;
     const maxPositionY =
       document.documentElement.clientHeight +
       document.documentElement.scrollTop;
@@ -62,6 +76,9 @@ export const MainPage = () => {
     }
   }
 
+
+  
+
   return (
     <div
       className="main-page-container container"
@@ -70,13 +87,17 @@ export const MainPage = () => {
         coordHandler(e);
       }}
     >
-      <MainTable
-        valute={valuteArr}
-        className="table-wrappper__valute-table valute-table"
-      />
-      {<Tooltip>{currentValute}</Tooltip>}
+      {isLoading ? (
+        <img src="/materials/images/loading-gif1.gif" className="loader" />
+      ) : (
+        <>
+          <MainTable
+            valute={valuteArr}
+            className="table-wrappper__valute-table valute-table"
+          />
+          {<Tooltip>{currentValute}</Tooltip>}
+        </>
+      )}
     </div>
-  
-
   );
 };

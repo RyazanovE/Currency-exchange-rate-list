@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCoordAction } from "../store/reducers/coordReducer";
 import { RootState } from "../store/store";
-import {isEnterReducer} from "../store/reducers/isEnterReducer"
 
 interface TooltipProps {}
 
