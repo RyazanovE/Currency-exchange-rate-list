@@ -13,23 +13,31 @@ export const ValutePage = () => {
   }, []);
 
   async function fetchValuteDays() {
-    const daysAmount = 10;
-    const fetchArr: ISelectedValue[] = [];
-    let url = "https://www.cbr-xml-daily.ru/daily_json.js";
+   
+    const series = async function () {
+      const daysAmount = 10;
+      let url = "https://www.cbr-xml-daily.ru/daily_json.js";
+      const fetchArr: ISelectedValue[] = [];
 
-    for (let i = 0; i < daysAmount; i++) {
+      for (let i = 0; i < daysAmount; i++) {
       try {
+      
         const response = await fetch(url);
         const result = await response.json();
-        url = result.PreviousURL;
-
         fetchArr.push({
           date: new Date(Date.parse(result.Date)).toLocaleString().substr(0, 5),
           value: result.Valute[localStorage.currentCharCode],
         });
+        url = result.PreviousURL;
+      
       } catch (e) {}
     }
-    setSelectedValuteArr(fetchArr);
+    return fetchArr
+    
+  }
+    const resultArr = await series()
+
+    setSelectedValuteArr(resultArr);
     setisLoading(false);
   }
 
