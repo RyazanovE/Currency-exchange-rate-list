@@ -33,6 +33,7 @@ export const ValutePage = () => {
     setisLoading(false);
   }
 
+
   return (
     <div className="valute-page-container container">
       {!isLoading ? (

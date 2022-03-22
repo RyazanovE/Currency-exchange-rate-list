@@ -9,12 +9,11 @@ export interface IValuteItem {
 }
 
 export interface ICoords {
-  pX: number,
-  pY: number,
-
+  pX: number;
+  pY: number;
 }
 
 export interface ISelectedValue {
-  date: string,
-  value: IValuteItem,
+  date: string;
+  value: IValuteItem;
 }

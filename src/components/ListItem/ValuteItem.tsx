@@ -13,7 +13,7 @@ export const ValuteItem: FC<ValuteItemProps> = ({ item }) => {
   const diff = valuteDiff(item.Value, item.Previous);
   const dispatch = useDispatch();
   const navigate = useNavigate();
- function valuteDiff(y: number, x: number) {
+  function valuteDiff(y: number, x: number) {
     return (((y - x) / x) * 100).toFixed(2);
   }
 
@@ -33,7 +33,6 @@ export const ValuteItem: FC<ValuteItemProps> = ({ item }) => {
 
   function clickHandler() {
     dispatch(ExitAction());
-    dispatch(setValuteAction(item));
     localStorage.currentCharCode = item.CharCode;
     localStorage.currentValuteName = item.Name;
     navigate("/valutepage");

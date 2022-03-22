@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCoordAction } from "../store/reducers/coordReducer";
 import { RootState } from "../store/store";
 
-interface TooltipProps {}
+interface TooltipProps {
+
+}
 
 export const Tooltip: FC<TooltipProps> = (props) => {
   const dispatch = useDispatch();
@@ -17,6 +19,8 @@ export const Tooltip: FC<TooltipProps> = (props) => {
   const isEnter = useSelector((state: RootState) => {
     return state.isEnterReducer.isEnter;
   });
+  
+  
 
   function getOpacity() {
     if (!isMoving && isEnter) {

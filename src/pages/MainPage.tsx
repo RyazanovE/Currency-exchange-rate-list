@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../components/store/store";
 import { Tooltip } from "../components/tooltip/Tooltip";
@@ -8,19 +8,20 @@ import {
   moveAction,
   stopAction,
 } from "../components/store/reducers/isMovingReducer";
-
-
-
+import useDebounce from "../components/hooks/useDebounce";
 
 export const MainPage = () => {
-  let timeout: any = useRef(null);
-  const tooltip = document.querySelector(".tooltip");
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const currentValute = useSelector(
     (state: RootState) => state.currentValuteReducer.Name
   );
   const [valuteArr, setValuteArr] = useState([]);
+  const debouncedCallback = useDebounce(
+    () => dispatch(moveAction()),
+    () => dispatch(stopAction()),
+    500
+  );
 
   useEffect(() => {
     dispatch(moveAction());
@@ -38,33 +39,23 @@ export const MainPage = () => {
     setIsLoading(false);
   }
 
-  function stopHandler(e: React.MouseEvent) {
-    e.preventDefault();
-    (() => {
-      dispatch(moveAction());
-      clearTimeout(timeout.current);
-      timeout.current = setTimeout(() => dispatch(stopAction()), 500);
-    })();
-  }
-
   function coordHandler(e: React.MouseEvent) {
+    const tooltip = document.querySelector(".tooltip");
     if (!tooltip) {
       return;
     }
+
     const pX = e.pageX + 5;
     const pY = e.pageY + 10;
 
-  
-
     const tooltipHeight = (tooltip as HTMLElement).offsetHeight;
     const tooltipWidth = (tooltip as HTMLElement).offsetWidth;
-    const currentPositionY = e.pageY + tooltipHeight;
-    const currentPositionX = e.pageX + tooltipWidth;
+    const currentPositionY = pY + tooltipHeight;
+    const currentPositionX = pX + tooltipWidth;
     const maxPositionY =
       document.documentElement.clientHeight +
       document.documentElement.scrollTop;
     const maxPositionX = document.documentElement.clientWidth;
-
     if (currentPositionX > maxPositionX && currentPositionY > maxPositionY) {
       dispatch(setCoordAction(pX - 10 - tooltipWidth, pY - tooltipHeight));
     } else if (currentPositionX > maxPositionX) {
@@ -76,14 +67,11 @@ export const MainPage = () => {
     }
   }
 
-
-  
-
   return (
     <div
       className="main-page-container container"
       onMouseMove={(e) => {
-        stopHandler(e);
+        debouncedCallback();
         coordHandler(e);
       }}
     >

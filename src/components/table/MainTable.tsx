@@ -15,7 +15,7 @@ export const MainTable: FC<MaintableProps> = (props) => {
       <tbody>
         <tr>
           <th>Букв. код</th>
-          <th>Валюта</th>
+          <th>Курс ЦБ</th>
           <th>%</th>
         </tr>
         <List<IValuteItem>
